@@ -22,15 +22,20 @@
 
 
 # 444444-444444-444448 (18)
-import numpy as np
+from faker import Faker
 import pandas as pd
 import random
-from constants import Banks
+import pytz
+from datetime import datetime
+from constants import Banks, Designations
+
 
 number_of_accounts = 2
 account_no, iban_no = "", ""
 accounts = []
+faker = Faker()
 
+# Account Data Generator
 for i in range(0, number_of_accounts):
     
     sample_account_no = random.sample(range(100000, 900000), 3)
@@ -51,6 +56,62 @@ for i in range(0, number_of_accounts):
 
 for account in accounts:
     print(account)
+
+
+# Transaction Data Generator
+
+
+columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
+# dataFrame = pd.DataFrame(columns = columns)
+data = []
+amount = 0
+
+for _ in range(50):
+    # Date Generator
+
+    date_time = faker.date_time_between(
+            start_date = datetime(2019,1,1),
+            tzinfo = pytz.timezone("Europe/Sarajevo"))
+
+    designation_cat = random.choice(list(Designations))
+    if designation_cat == Designations.vehicle:
+        amount = round(random.uniform(1, 500), 2)
+    elif designation_cat == Designations.loan:
+        amount = round(random.uniform(10000, 500000), 2)
+    elif designation_cat == Designations.pharmacy:
+        amount = round(random.uniform(1, 200), 2)
+    elif designation_cat == Designations.bank_fee:
+        amount = round(random.uniform(1, 50), 2)
+    elif designation_cat == Designations.atm:
+        amount = round(random.uniform(0, 2000), 2)
+    elif designation_cat == Designations.shopping:
+        amount = round(random.uniform(0, 10000), 2)
+    elif designation_cat == Designations.salary:
+        amount = round(random.uniform(0, 10000), 2)
+    elif designation_cat == Designations.other:
+        amount = round(random.uniform(0, 500), 2)
+    
+    account = random.choice(accounts)
+    data.append([
+            date_time.strftime("%-d.%-m.%Y %H:%M"),
+            random.choice(designation_cat.value),
+            amount, account[2], account[0], account[1]
+        ])
+
+    #dataFrame.append({
+    #    "date_of_transaction": date_time.strftime("%-d.%-m.%Y %H:%M"),
+     #   "designation": random.choice(designation_cat.value), 
+      #  "amount": amount,
+       # "bank": account[2],
+       # "account_no": account[0],
+       # "iban": account[1]
+       # }, ignore_index = True)
+
+dataFrame = pd.DataFrame(data, columns = columns)
+print(dataFrame)
+
+
+
 
 
 

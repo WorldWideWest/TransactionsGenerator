@@ -9,3 +9,13 @@ class Banks(Enum):
     bank_no_6 = "NLB Bank"
     bank_no_7 = "Ziraat Banka"
     bank_no_8 = "Sparkasse Bank"
+
+class Designations(Enum):
+    vehicle = ["ecotok", "gazprom", "hifa benz", "autoceste"]
+    loan = ["kreidt", "trajni nalog", "naplata po kredit.kartici"]
+    pharmacy = ["apoteka", "pharmacy", "pharm"]
+    bank_fee = ["naknada", "tekuci rn kamata", "provizija za nalog", "provisioon"]
+    atm = ["atm"]
+    shopping = ["doo", "kupovina", "bingo", "koonzum", "merkator"]
+    salary = ["plata", "topli", "prevoz", "uplata"]
+    other = ["usluga", "kesa", "poklon", "teretana", "kino", "kafa", "izlazak"]
