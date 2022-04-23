@@ -1,7 +1,7 @@
 import pandas as pd
 from faker import Faker
 from datetime import datetime
-import random, pytz, sys, os
+import random, pytz, os
 
 from utils.constants import Banks, Designations
 
