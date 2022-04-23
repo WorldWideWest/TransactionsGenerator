@@ -16,6 +16,6 @@ class Designations(Enum):
     pharmacy = ["apoteka", "pharmacy", "pharm"]
     bank_fee = ["naknada", "tekuci rn kamata", "provizija za nalog", "provisioon"]
     atm = ["atm"]
-    shopping = ["doo", "kupovina", "bingo", "koonzum", "merkator"]
+    shopping = ["doo", "kupovina", "bingo", "konzum", "merkator"]
     salary = ["plata", "topli", "prevoz", "uplata"]
     other = ["usluga", "kesa", "poklon", "teretana", "kino", "kafa", "izlazak"]

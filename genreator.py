@@ -11,10 +11,10 @@ account_no, iban_no = "", ""
 accounts = []
 faker = Faker()
 
-for i in range(0, number_of_accounts):
+for _ in range(0, number_of_accounts):
     
     sample_account_no = random.sample(range(100000, 900000), 3)
-    sample_iban = random.sample(range(1000000000000000000, 9000000000000000000), 1)
+    sample_iban = random.sample(range(100000000000000000, 900000000000000000), 1)
 
     for i in range(0, len(sample_account_no)):
         if i == len(sample_account_no) - 1:
@@ -40,21 +40,21 @@ for _ in range(number_of_transactions):
 
     designation_cat = random.choice(list(Designations))
     if designation_cat == Designations.vehicle:
-        amount = round(random.uniform(1, 500), 2)
+        amount = float(round(random.uniform(1, 500), 2))
     elif designation_cat == Designations.loan:
-        amount = round(random.uniform(10000, 500000), 2)
+        amount = float(round(random.uniform(10000, 500000), 2))
     elif designation_cat == Designations.pharmacy:
-        amount = round(random.uniform(1, 200), 2)
+        amount = float(round(random.uniform(1, 200), 2))
     elif designation_cat == Designations.bank_fee:
-        amount = round(random.uniform(1, 50), 2)
+        amount = float(round(random.uniform(1, 50), 2))
     elif designation_cat == Designations.atm:
-        amount = round(random.uniform(0, 2000), 2)
+        amount = float(round(random.uniform(0, 2000), 2))
     elif designation_cat == Designations.shopping:
-        amount = round(random.uniform(0, 10000), 2)
+        amount = float(round(random.uniform(0, 10000), 2))
     elif designation_cat == Designations.salary:
-        amount = round(random.uniform(0, 10000), 2)
+        amount = float(round(random.uniform(0, 10000), 2))
     elif designation_cat == Designations.other:
-        amount = round(random.uniform(0, 500), 2)
+        amount = float(round(random.uniform(0, 500), 2))
     
     account = random.choice(accounts)
     data.append([
