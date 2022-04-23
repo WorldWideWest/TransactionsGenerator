@@ -48,13 +48,13 @@ for _ in range(number_of_transactions):
     elif designation_cat == Designations.bank_fee:
         amount = float(round(random.uniform(1, 50), 2))
     elif designation_cat == Designations.atm:
-        amount = float(round(random.uniform(0, 2000), 2))
+        amount = float(round(random.uniform(1, 2000), 2))
     elif designation_cat == Designations.shopping:
-        amount = float(round(random.uniform(0, 10000), 2))
+        amount = float(round(random.uniform(1, 10000), 2))
     elif designation_cat == Designations.salary:
-        amount = float(round(random.uniform(0, 10000), 2))
+        amount = float(round(random.uniform(1, 10000), 2))
     elif designation_cat == Designations.other:
-        amount = float(round(random.uniform(0, 500), 2))
+        amount = float(round(random.uniform(1, 500), 2))
     
     account = random.choice(accounts)
     data.append([
