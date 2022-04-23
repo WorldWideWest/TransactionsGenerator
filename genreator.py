@@ -5,7 +5,6 @@ import random, pytz, sys, os
 
 from constants import Banks, Designations
 
-
 number_of_accounts, number_of_transactions = int(sys.argv[1]), int(sys.argv[2])
 account_no, iban_no = "", ""
 accounts = []
@@ -28,7 +27,6 @@ for _ in range(0, number_of_accounts):
     accounts.append([
         account_no, iban_no, random.choice(list(Banks)).value])
     account_no, iban_no = "", ""
-
 
 columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
 data, amount = [], 0
@@ -67,7 +65,7 @@ dataFrame = pd.DataFrame(data, columns = columns)
 if not os.path.exists(os.path.join(os.getcwd(), "exports")):
     os.makedirs("exports")
 
-now = datetime.now().strftime("%-d-%-m-%Y_%H:%M")
-dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }.csv"), sep=";", index = False)
+now = datetime.now().strftime("%-d-%-m-%Y_%H-%M")
+dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }.csv"), sep = ";", index = False)
 
 print(dataFrame)
