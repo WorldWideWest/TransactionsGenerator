@@ -12,9 +12,9 @@ class Banks(Enum):
 
 class Designations(Enum):
     vehicle = ["ecotok", "gazprom", "hifa benz", "autoceste"]
-    loan = ["kreidt", "trajni nalog", "naplata po kredit.kartici"]
+    loan = ["kredit", "trajni nalog", "naplata po kredit.kartici"]
     pharmacy = ["apoteka", "pharmacy", "pharm"]
-    bank_fee = ["naknada", "tekuci rn kamata", "provizija za nalog", "provisioon"]
+    bank_fee = ["naknada", "tekuci rn kamata", "provizija za nalog", "provision"]
     atm = ["atm"]
     shopping = ["doo", "kupovina", "bingo", "konzum", "merkator"]
     salary = ["plata", "topli", "prevoz", "uplata"]
