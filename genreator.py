@@ -1,41 +1,16 @@
-
-
-# date_of_transaction - Specify the DateTime format
-# designation - constants.py file 
-# amount
-# bank - constants.py file
-# account_no - Randomly genrated
-# iban - Randomly genrated
-
-
-# Number of accounts 2, 5, 6 
-# Auto generate the ibans for the created accounts
-# Specfiy the Bank of the account also randomly
-#################################################
-
-# Generate the Transactions
-# Ask the user for the number of transactions he/she wants 100
-# Randomly generate the dates
-# Randomly generate the designations
-# Randomly generate the amounts
-# Randomly assign the accounts to transactions
-
-
-# 444444-444444-444448 (18)
-from faker import Faker
 import pandas as pd
-import random
-import pytz
+from faker import Faker
 from datetime import datetime
+import random, pytz, sys, os
+
 from constants import Banks, Designations
 
 
-number_of_accounts = 2
+number_of_accounts, number_of_transactions = int(sys.argv[1]), int(sys.argv[2])
 account_no, iban_no = "", ""
 accounts = []
 faker = Faker()
 
-# Account Data Generator
 for i in range(0, number_of_accounts):
     
     sample_account_no = random.sample(range(100000, 900000), 3)
@@ -54,21 +29,11 @@ for i in range(0, number_of_accounts):
         account_no, iban_no, random.choice(list(Banks)).value])
     account_no, iban_no = "", ""
 
-for account in accounts:
-    print(account)
-
-
-# Transaction Data Generator
-
 
 columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
-# dataFrame = pd.DataFrame(columns = columns)
-data = []
-amount = 0
+data, amount = [], 0
 
-for _ in range(50):
-    # Date Generator
-
+for _ in range(number_of_transactions):
     date_time = faker.date_time_between(
             start_date = datetime(2019,1,1),
             tzinfo = pytz.timezone("Europe/Sarajevo"))
@@ -95,26 +60,14 @@ for _ in range(50):
     data.append([
             date_time.strftime("%-d.%-m.%Y %H:%M"),
             random.choice(designation_cat.value),
-            amount, account[2], account[0], account[1]
-        ])
-
-    #dataFrame.append({
-    #    "date_of_transaction": date_time.strftime("%-d.%-m.%Y %H:%M"),
-     #   "designation": random.choice(designation_cat.value), 
-      #  "amount": amount,
-       # "bank": account[2],
-       # "account_no": account[0],
-       # "iban": account[1]
-       # }, ignore_index = True)
+            amount, account[2], account[0], account[1]])
 
 dataFrame = pd.DataFrame(data, columns = columns)
+
+if not os.path.exists(os.path.join(os.getcwd(), "exports")):
+    os.makedirs("exports")
+
+now = datetime.now().strftime("%-d-%-m-%Y_%H:%M")
+dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }.csv"), sep=";", index = False)
+
 print(dataFrame)
-
-
-
-
-
-
-if __name__ == "__main__":
-    pass
-

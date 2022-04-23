@@ -2,10 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.swp
+/exports
 
 # C extensions
 *.so
-
 # Distribution / packaging
 .Python
 build/
@@ -127,3 +128,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.genreator.py.swp
+.genreator.py.swp
+.genreator.py.swp
