@@ -25,10 +25,16 @@ def main():
                 account_no += f"{ sample_account_no[i] }-"
 
         iban_no += f"BA{ sample_iban[0] }"
-        sample_bank = random.choice(list(Banks))
+
+        sample_bank = random.sample(list(Banks), 1)
+        print(sample_bank[0].value)
         
+        for account in accounts:
+            if account[2] == sample_bank[0].value:
+                sample_bank = random.sample(list(Banks), 1)
+
         accounts.append([
-            account_no, iban_no, random.choice(list(Banks)).value])
+            account_no, iban_no, sample_bank[0].value])
         account_no, iban_no = "", ""
 
     columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
@@ -41,21 +47,21 @@ def main():
 
         designation_cat = random.choice(list(Designations))
         if designation_cat == Designations.vehicle:
-            amount = float(round(random.uniform(1, 500), 2))
+            amount = float(round(random.uniform(1, 100), 2))
         elif designation_cat == Designations.loan:
-            amount = float(round(random.uniform(10000, 500000), 2))
+            amount = float(round(random.uniform(100, 5000), 2))
         elif designation_cat == Designations.pharmacy:
             amount = float(round(random.uniform(1, 200), 2))
         elif designation_cat == Designations.bank_fee:
             amount = float(round(random.uniform(1, 50), 2))
         elif designation_cat == Designations.atm:
-            amount = float(round(random.uniform(1, 2000), 2))
+            amount = float(round(random.uniform(1, 1500), 2))
         elif designation_cat == Designations.shopping:
             amount = float(round(random.uniform(1, 10000), 2))
         elif designation_cat == Designations.salary:
             amount = float(round(random.uniform(1, 10000), 2))
         elif designation_cat == Designations.other:
-            amount = float(round(random.uniform(1, 500), 2))
+            amount = float(round(random.uniform(1, 100), 2))
         
         account = random.choice(accounts)
         data.append([
