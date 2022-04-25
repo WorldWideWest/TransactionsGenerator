@@ -21,11 +21,9 @@ Which should activate your environment, after that run the command to install al
 ```bash
 pip install -r requirements.txt
 ```
-Once all packages are installed you should be able to run the script. But before that you need to pass two variables to the script on running it and these are the `number of accounts you want to generate` and `number of transactions`:
+Once all packages are installed you should be able to run the script. Ocnce you run it it will ask you for the number of accounts you want and the number of transactions it should generate:
 ```bash
-python generator.py 3 50 
-# 3 - number of accounts that are generated
-# 50 - number of transactions that are generated
+python cli.py  
 ```
 
-The generated data is now available in the `transactions` folder that the script created and it is in the form of a `.csv` file.
+The generated data is now available in the `exports` folder that the script created and it is in the form of a `.csv` file.
