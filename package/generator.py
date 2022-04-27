@@ -9,11 +9,13 @@ def main():
     print("Please fill in the details")
     number_of_accounts = int(input("Number of accounts: "))
     number_of_transactions = int(input("Number of transactions: "))
+    delimiter = str(input("Please insert your delimiter: "))
     account_no, iban_no = "", ""
-    accounts = []
+    accounts, banks = [], []
+    bank_exists = True
     faker = Faker()
 
-    for _ in range(0, number_of_accounts):
+    for index in range(0, number_of_accounts):
         
         sample_account_no = random.sample(range(100000, 900000), 3)
         sample_iban = random.sample(range(100000000000000000, 900000000000000000), 1)
@@ -27,14 +29,15 @@ def main():
         iban_no += f"BA{ sample_iban[0] }"
 
         sample_bank = random.sample(list(Banks), 1)
-        print(sample_bank[0].value)
-        
-        for account in accounts:
-            if account[2] == sample_bank[0].value:
+       
+        if index == 0:
+            banks.append(sample_bank[0].value)
+        else:
+            while sample_bank[0].value in banks:
                 sample_bank = random.sample(list(Banks), 1)
 
-        accounts.append([
-            account_no, iban_no, sample_bank[0].value])
+        accounts.append([account_no, iban_no, sample_bank[0].value])
+            
         account_no, iban_no = "", ""
 
     columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
@@ -75,7 +78,7 @@ def main():
         os.makedirs("exports")
 
     now = datetime.now().strftime("%-d-%-m-%Y_%H-%M")
-    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }.csv"), sep = ";", index = False)
+    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }_accounts_{ len(accounts) }.csv"), sep = delimiter, index = False)
 
     print(dataFrame)
 
