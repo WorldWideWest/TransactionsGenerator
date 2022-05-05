@@ -15,7 +15,7 @@ def main():
     bank_exists = True
     faker = Faker()
 
-    for index in range(0, 8):
+    for index in range(number_of_accounts):
         
         sample_account_no = random.sample(range(100000, 900000), 3)
         sample_iban = random.sample(range(100000000000000000, 900000000000000000), 1)
@@ -37,7 +37,7 @@ def main():
     columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
     data, amount = [], 0
 
-    for _ in range(150):
+    for _ in range(number_of_transactions):
         date_time = faker.date_time_between(
                 start_date = datetime(2019,1,1),
                 tzinfo = pytz.timezone("Europe/Sarajevo"))
