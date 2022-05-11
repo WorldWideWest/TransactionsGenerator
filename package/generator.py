@@ -72,7 +72,7 @@ def main():
         os.makedirs("exports")
 
     now = datetime.now().strftime("%-d-%-m-%Y_%H-%M")
-    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }_accounts_{ len(accounts) }.csv"), sep = ";", index = False)
+    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }_accounts_{ len(accounts) }.csv"), sep = delimiter, index = False)
 
     print(dataFrame)
 

@@ -21,9 +21,14 @@ Which should activate your environment, after that run the command to install al
 ```bash
 pip install -r requirements.txt
 ```
-Once all packages are installed you should be able to run the script. Ocnce you run it it will ask you for the number of accounts you want and the number of transactions it should generate:
+Once all packages are installed you should be able to run the script. As you try to run the script you'll be prompted to insert 3 values:
 ```bash
-python cli.py  
+python cli.py
 ```
+
+Once you run the command you'll be asked to input these values:
+1. Number of accounts - This value accepts an integer in range from 1 - 8, beacues a user can have only one account for one bank
+2. Number of transactions - Here you can set any positive amount
+3. Delimiter - The delimiter value that is going to sperate values between columns
 
 The generated data is now available in the `exports` folder that the script created and it is in the form of a `.csv` file.
