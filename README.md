@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.6](https://img.shields.io/badge/python-3.8.10-blue.svg)](https://www.python.org/downloads/release/python-381/)
+
 # TransactionsGenerator
 
 ## General info
@@ -9,6 +12,7 @@ The transactions are generated randomly for the time period from 1.1.2019 to tod
 After it generates the transactions and assigns them to the accounts it exports these transactions to a `.csv` file in the `/exports` folder which is generated on running the script.
 
 ## Running the script
+Before you try to run the script please check if you [updated](https://www.theuptide.com/upgrade-pip/) `pip` because it can cause errors with the process of installing the necessary packages for this script.
 To run the script you need to create an virtual environment for python, and you will do that by typing:
 ```bash
 python3 -m venv env # env is the name of the environment
