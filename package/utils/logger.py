@@ -3,14 +3,14 @@ import logging, os, sys
 class Logger(object):
 
     def __init__(self, level = logging.DEBUG,
-        file = os.path.join(os.getcwd(), "exports/logs.log"),
+        file = os.path.join(os.getcwd(), "exports/.logs.log"),
         formatter = logging.Formatter("[%(asctime)s] - [%(levelname)s] - %(message)s")):
 
         self.level = level
         self.file = file
         self.formatter = formatter
 
-    def getLogger(self) -> logging.Logger:
+    def get_logger(self) -> logging.Logger:
 
         logger = logging.getLogger()
         logger.setLevel(self.level)
