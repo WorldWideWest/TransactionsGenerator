@@ -1,7 +1,7 @@
 import pandas as pd
 from faker import Faker
 from datetime import datetime
-import random, pytz, os
+import random, pytz, os, logging, sys
 
 from utils.constants import Designations
 from utils.account import Account
@@ -11,9 +11,29 @@ def main():
     number_of_accounts = int(input("Number of accounts: "))
     number_of_transactions = int(input("Number of transactions: "))
     delimiter = str(input("Please insert your delimiter: "))
-    faker = Faker()
+    
 
-    account = Account()
+    # Logging Config
+    path = os.path.join(os.getcwd(), "exports")
+    logFormat = logging.Formatter("[%(asctime)s] - [%(levelname)s] - %(message)s")
+
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    
+    consoleHandler = logging.StreamHandler(sys.stdout)
+    
+    consoleHandler.setLevel(logging.DEBUG)
+    consoleHandler.setFormatter(logFormat)
+
+    fileHandler = logging.FileHandler(os.path.join(path, "logs.log"))
+    fileHandler.setLevel(logging.INFO)
+    fileHandler.setFormatter(logFormat)
+
+    logger.addHandler(consoleHandler)
+    logger.addHandler(fileHandler)
+
+
+    account, faker = Account(), Faker()
     accounts = account.generate_accounts(number_of_accounts)
 
     designations = list(Designations)
@@ -59,7 +79,6 @@ def main():
     now = datetime.now().strftime("%-d-%-m-%Y_%H-%M")
     dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }_accounts_{ len(accounts) }.csv"), sep = delimiter, index = False)
 
-    print(dataFrame)
-
+    logger.info(f"The file is available at { path }")
 if __name__ == "__main__":
     main()
