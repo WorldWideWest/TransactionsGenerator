@@ -1,3 +1,4 @@
+from fileinput import filename
 import pandas as pd
 from faker import Faker
 from datetime import datetime
@@ -5,32 +6,17 @@ import random, pytz, os, logging, sys
 
 from utils.constants import Designations
 from utils.account import Account
+from utils.logger import Logger
 
 def main():
     print("Please fill in the details")
     number_of_accounts = int(input("Number of accounts: "))
     number_of_transactions = int(input("Number of transactions: "))
     delimiter = str(input("Please insert your delimiter: "))
+
     
-
-    # Logging Config
-    path = os.path.join(os.getcwd(), "exports")
-    logFormat = logging.Formatter("[%(asctime)s] - [%(levelname)s] - %(message)s")
-
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-    
-    consoleHandler = logging.StreamHandler(sys.stdout)
-    
-    consoleHandler.setLevel(logging.DEBUG)
-    consoleHandler.setFormatter(logFormat)
-
-    fileHandler = logging.FileHandler(os.path.join(path, "logs.log"))
-    fileHandler.setLevel(logging.INFO)
-    fileHandler.setFormatter(logFormat)
-
-    logger.addHandler(consoleHandler)
-    logger.addHandler(fileHandler)
+    logger = Logger(level = logging.INFO)
+    logger = logger.getLogger()
 
 
     account, faker = Account(), Faker()
@@ -77,8 +63,10 @@ def main():
         os.makedirs("exports")
 
     now = datetime.now().strftime("%-d-%-m-%Y_%H-%M")
-    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", f"export_{ now }_accounts_{ len(accounts) }.csv"), sep = delimiter, index = False)
+    fileName = f"export_{ now }_A{ len(accounts) }_T{ len(data) }.csv"
+    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", fileName), sep = delimiter, index = False)
 
-    logger.info(f"The file is available at { path }")
+    logger.info(f"You created a file with { len(accounts) } Accounts and { len(data) } Transactions, the file is available at { os.path.join(os.getcwd(), 'exports', fileName) } ")
+    
 if __name__ == "__main__":
     main()
