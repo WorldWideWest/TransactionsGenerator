@@ -34,5 +34,5 @@ class Input(object):
         number_of_accounts = int(input("Number of accounts: "))
         number_of_transactions = int(input("Number of transactions: "))
         delimiter = str(input("Please insert your delimiter: "))
-
+        print()
         return number_of_accounts, number_of_transactions, delimiter

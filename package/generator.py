@@ -1,5 +1,3 @@
-from fileinput import filename
-from platform import platform
 import pandas as pd
 from faker import Faker
 from datetime import datetime
@@ -62,8 +60,6 @@ def main():
     now = datetime.now().strftime(config.dateFormatUnix.value[1] if sys.platform != "win32" else config.dateFormatWin32.value[1])
     fileName = config.fileName(now, accounts, data)
     dataFrame.to_csv(os.path.join(os.getcwd(), "exports", fileName), sep = inputs[2], index = False)
-
-    print()
 
     logger.info(f"You created a file with { len(accounts) } Accounts and { len(data) } Transactions, the file is available at { os.path.join(os.getcwd(), 'exports', fileName) } ")
     
