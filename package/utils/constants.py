@@ -22,7 +22,11 @@ class Designations(Enum):
     other = ["usluga", "kesa", "poklon", "teretana", "kino", "kafa", "izlazak"]
 
 class Config(Enum):
+    """ The configuration file contains constatns for generating the file name and date time formats for unix platforms and windows platform """
     fileName = lambda now, accounts, data: f"EXPORT_{ now }_ACC_{ len(accounts) }_TRA_{ len(data) }.csv"
+    # Faker date fromat, File name date format
+    dateFormatWin32 = ["%d.%m.%Y  %H:%M", "%d_%m_%Y_%H_%M"] 
+    dateFormatUnix = ["%-d.%-m.%Y %H:%M", "%-d-%-m-%Y_%H-%M"] 
 
 
 class Input(object):
@@ -31,4 +35,4 @@ class Input(object):
         number_of_transactions = int(input("Number of transactions: "))
         delimiter = str(input("Please insert your delimiter: "))
 
-        return [number_of_accounts, number_of_transactions, delimiter]
+        return number_of_accounts, number_of_transactions, delimiter

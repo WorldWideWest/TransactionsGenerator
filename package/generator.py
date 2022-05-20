@@ -1,4 +1,5 @@
 from fileinput import filename
+from platform import platform
 import pandas as pd
 from faker import Faker
 from datetime import datetime
@@ -9,7 +10,7 @@ from utils.account import Account
 from utils.logger import Logger
 
 def main():
-    inputer = Input
+    inputer, config = Input, Config
     inputs = inputer.get_inputs()
     
     logger = Logger(level = logging.INFO)
@@ -50,7 +51,7 @@ def main():
             designation_cat = Designations.salary
             accounts[index][3] += float(round(random.uniform(1400, 5000), 2))
 
-        data.append([date_time.strftime("%-d.%-m.%Y %H:%M"), random.choice(designation_cat.value),
+        data.append([date_time.strftime(config.dateFormatUnix.value[0] if sys.platform != "win32" else config.dateFormatWin32.value[0]), random.choice(designation_cat.value),
                 amount, accounts[index][0], accounts[index][1], accounts[index][2]])
 
     dataFrame = pd.DataFrame(data, columns = columns)
@@ -58,9 +59,8 @@ def main():
     if not os.path.exists(os.path.join(os.getcwd(), "exports")):
         os.makedirs("exports")
 
-    now = datetime.now().strftime("%-d-%-m-%Y_%H-%M")
-
-    fileName = Config.fileName(now, accounts, data)
+    now = datetime.now().strftime(config.dateFormatUnix.value[1] if sys.platform != "win32" else config.dateFormatWin32.value[1])
+    fileName = config.fileName(now, accounts, data)
     dataFrame.to_csv(os.path.join(os.getcwd(), "exports", fileName), sep = inputs[2], index = False)
 
     print()
