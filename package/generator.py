@@ -10,9 +10,6 @@ from utils.logger import Logger
 def main():
     inputer, config = Input, Config
     inputs = inputer.get_inputs()
-    
-    logger = Logger(level = logging.INFO)
-    logger = logger.get_logger()
 
     account, faker = Account(), Faker()
     accounts = account.generate_accounts(inputs[0])
@@ -56,6 +53,9 @@ def main():
 
     if not os.path.exists(os.path.join(os.getcwd(), "exports")):
         os.makedirs("exports")
+
+    logger = Logger(level = logging.INFO)
+    logger = logger.get_logger()
 
     now = datetime.now().strftime(config.dateFormatUnix.value[1] if sys.platform != "win32" else config.dateFormatWin32.value[1])
     fileName = config.fileName(now, accounts, data)
