@@ -25,8 +25,12 @@ class Config(Enum):
     """ The configuration file contains constatns for generating the file name and date time formats for unix platforms and windows platform """
     fileName = lambda now, accounts, data: f"EXPORT_{ now }_ACC_{ len(accounts) }_TRA_{ len(data) }.csv"
     # Faker date fromat, File name date format
-    dateFormatWin32 = ["%d.%m.%Y  %H:%M", "%d_%m_%Y_%H_%M"] 
-    dateFormatUnix = ["%-d.%-m.%Y %H:%M", "%-d-%-m-%Y_%H-%M"] 
+    DATE_FORMAT_WIN_32 = ["%d.%m.%Y  %H:%M", "%d_%m_%Y_%H_%M"] 
+    DATE_FROMAT_UNIX = ["%-d.%-m.%Y %H:%M", "%-d-%-m-%Y_%H-%M"] 
+    COLUMNS = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
+    DIR_NAME = "exports"
+    LOG_MESSAGE = lambda num_accounts, num_data, dir_name: f"You created a file with { num_accounts } Accounts and { num_data } Transactions, the file is available at { dir_name } "
+
 
 
 class Input(object):

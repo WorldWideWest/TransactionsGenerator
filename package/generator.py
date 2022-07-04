@@ -17,7 +17,6 @@ def main():
     designations = list(Designations)
     designations.remove(designations[6])
 
-    columns = ["date_of_transaction", "designation", "amount", "bank", "account_no", "iban"]
     data, amount = [], 0
     
     for _ in range(inputs[1]):
@@ -46,22 +45,22 @@ def main():
             designation_cat = Designations.salary
             accounts[index][3] += float(round(random.uniform(1400, 5000), 2))
 
-        data.append([date_time.strftime(config.dateFormatUnix.value[0] if sys.platform != "win32" else config.dateFormatWin32.value[0]), random.choice(designation_cat.value),
+        data.append([date_time.strftime(config.DATE_FROMAT_UNIX.value[0] if sys.platform != "win32" else config.dateFormatWin32.value[0]), random.choice(designation_cat.value),
                 amount, accounts[index][0], accounts[index][1], accounts[index][2]])
 
-    dataFrame = pd.DataFrame(data, columns = columns)
+    dataFrame = pd.DataFrame(data, columns = config.COLUMNS.value)
 
-    if not os.path.exists(os.path.join(os.getcwd(), "exports")):
-        os.makedirs("exports")
+    if not os.path.exists(os.path.join(os.getcwd(), config.DIR_NAME.value)):
+        os.makedirs(config.DIR_NAME)
 
     logger = Logger(level = logging.INFO)
     logger = logger.get_logger()
 
-    now = datetime.now().strftime(config.dateFormatUnix.value[1] if sys.platform != "win32" else config.dateFormatWin32.value[1])
+    now = datetime.now().strftime(config.DATE_FROMAT_UNIX.value[1] if sys.platform != "win32" else config.dateFormatWin32.value[1])
     fileName = config.fileName(now, accounts, data)
-    dataFrame.to_csv(os.path.join(os.getcwd(), "exports", fileName), sep = inputs[2], index = False)
+    dataFrame.to_csv(os.path.join(os.getcwd(), config.DIR_NAME.value, fileName), sep = inputs[2], index = False)
 
-    logger.info(f"You created a file with { len(accounts) } Accounts and { len(data) } Transactions, the file is available at { os.path.join(os.getcwd(), 'exports', fileName) } ")
-    
+    logger.info(config.LOG_MESSAGE(len(accounts), len(data), os.path.join(os.getcwd(), config.DIR_NAME.value, fileName)))
+
 if __name__ == "__main__":
     main()
